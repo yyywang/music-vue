@@ -34,9 +34,11 @@ export default {
 .m-header {
   display flex
   height 60px
-  padding-left 160px
-  padding-right 160px
+  padding-left 10%
+  padding-right 10%
   bg-image('bg')
+  background-size 100% 60px
+  box-shadow 0 10px 10px #ccc
   .left {
     width 50%
     display flex
@@ -71,9 +73,9 @@ export default {
       bg-image('add')
     }
     .img-notice {
-      width 22px
-      height 20px
-      background-size 22px 20px
+      width 20px
+      height 18px
+      background-size 20px 18px
       opacity 0.9
       bg-image('notice')
     }
