@@ -1,0 +1,120 @@
+.form-group {
+  height 40px
+  vertical-align middle
+  padding 10px 5px
+  font-size $font-size-large
+  label {
+    display inline-block
+    line-height 1.2em
+    max-width 10%
+    vertical-align middle
+    margin-right 5%
+    word-wrap break-word
+    word-break break-all
+  }
+  input[type=text], input[type=password] {
+    width 83%
+    box-sizing border-box
+    height 40px
+    border 1px solid $color-theme
+    border-radius 8px
+    padding-left 10px
+    padding-right 10px
+    font-size 16px
+  }
+  input[type=radio], input[type=checkbox] {
+    appearance none
+    width 22px
+    height 22px
+    background-color #ffffff
+    vertical-align middle
+    border 1px solid $color-theme
+    border-radius 8px
+    transition all 250ms ease
+    cursor pointer
+  }
+  input[type=radio]:checked, input[type=checkbox]:checked {
+    background-color $color-theme
+    box-shadow inset 0 0 0 4px #ffffff
+  }
+}
+.form-title {
+  h2 {
+    text-align center
+    font-size $font-size-large-x
+    margin-bottom 20px
+  }
+}
+.form-bg-panel {
+  width 390px
+  padding 30px 70px
+  margin 0 auto
+  margin-top 36px
+  background-color #ffffff
+  color $color-theme
+  border-radius 8px
+  box-shadow 0 6px 6px #cccccc
+}
+/* btn */
+.btn-default {
+  cursor pointer
+  background-color $color-theme-d
+  color #4d4d4d
+  border-radius 8px
+  border none
+  width 147px
+  height 40px
+  font-size $font-size-large
+  margin 0 auto
+  transition box-shadow 0.5s
+}
+.btn-default:hover {
+  box-shadow 0 6px 6px #eeeeee
+  transition box-shadow 0.5s
+}
+
+
+.btn-info {
+  cursor pointer
+  background-color $color-theme
+  color #ffffff
+  border-radius 4px
+  transition all .1s ease
+  border none
+  padding 5px 10px
+}
+
+.btn-info:hover {
+  background-color $color-theme-md
+  transition all .1s ease
+}
+
+.btn-default:active,
+.btn-info:active {
+  transform translate(1px, 1px)
+}
+
+.btn-default:disabled,
+.btn-info:disabled {
+  background-color: rgba(0, 0, 0, .1)
+  cursor:no-drop
+}
+
+/* 评论输入框 */
+.comment-input {
+  box-sizing border-box
+  font-size 14px
+  border-radius 4px
+  padding 10px 10px
+  border 1px solid #e5e9ef
+  background-color #f4f5f7
+  &::-webkit-input-placeholder {
+    font-size 14px
+  }
+  transition: all .1s ease
+  &:focus {
+    border 1px solid $color-theme
+    background-color #ffffff
+    transition: all .1s ease
+  }
+}

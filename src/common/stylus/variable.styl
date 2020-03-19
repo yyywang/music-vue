@@ -3,14 +3,24 @@ $color-background = #EEEEEE
 $color-background-d = rgba(0, 0, 0, 0.3)
 $color-highlight-background = #333
 $color-dialog-background = #666
-$color-theme = #829E9A
-$color-theme-d = #DAE7E5
+$color-theme = rgb(130,158,154) // #829E9A
+$color-theme-md = #B5C8C5
+$color-theme-lg = #668480
+$color-theme-d = rgb(218,231,229) // #DAE7E5
 $color-sub-theme = #1A679D
-$color-text = #fff
-$color-text-d = rgba(255, 255, 255, 0.3)
-$color-text-l = rgba(255, 255, 255, 0.5)
-$color-text-ll = rgba(255, 255, 255, 0.8)
+$color-text = #4D4D4D
+$color-text-black = #1E1C1D
 
+color-theme-rgba($alpha)
+  rgba(130,158,154,$alpha)
+
+color-theme-d-rgba($alpha)
+  rgba(218,231,229,$alpha)
+
+color-sub-theme-rgba($alpha)
+  rgba(26,103,157,$alpha)
+
+$color-bg-recommend-card = #B5C8C5
 //字体定义规范
 $font-size-small-s = 10px
 $font-size-small = 12px
@@ -18,3 +28,6 @@ $font-size-medium = 14px
 $font-size-medium-x = 16px
 $font-size-large = 18px
 $font-size-large-x = 22px
+
+// 布局
+$layout-margin-top = 30px // 版心 margin-top 值

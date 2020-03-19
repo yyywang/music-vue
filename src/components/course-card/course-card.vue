@@ -5,7 +5,7 @@
     </div>
     <div class="introduce">
       <div class="title">{{title}}</div>
-      <div class="abstract">{{abstract}}爱丽丝打开放假啊拉萨的咖啡机爱丽丝</div>
+      <div class="abstract">{{abstract}}爱丽丝打开放爱丽丝打开放爱丽丝打开放爱丽丝打开放爱丽丝打开放爱丽丝打开放假啊拉萨的咖啡机爱丽丝</div>
     </div>
   </div>
 </template>
@@ -40,11 +40,13 @@ export default {
       font-size $font-size-medium
       height 2em
       line-height 2em
+      text-shadow 0 5px 10px rgba(0,0,0,0.2)
     }
     .abstract {
-      color #666666
       font-size $font-size-small
-      no-wrap()
+      line-height 1.3em
+      color #666666
+      wrap-n-text(2)
     }
   }
 }

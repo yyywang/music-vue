@@ -18,6 +18,7 @@ export default {}
 
 <style lang='stylus'>
 @import '~common/stylus/variable'
+@import '~common/stylus/mixin'
 
 .header-tab {
   display inline-flex
@@ -31,6 +32,7 @@ export default {}
       padding-bottom 10px
       color #fff
       opacity 0.9
+      cursor pointer
     }
     &.router-link-active {
       .tab-link {

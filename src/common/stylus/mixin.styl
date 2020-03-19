@@ -1,22 +1,87 @@
 // 背景图片
-bg-image($url)
-  background-image: url($url + "@2x.png")
+bg-image($url) {
+  background-image url($url + '@2x.png')
   // @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
-  //   background-image: url($url + "@3x.png")
-
+  // background-image: url($url + "@3x.png")
+}
 // 不换行
-no-wrap()
-  text-overflow: ellipsis
-  overflow: hidden
-  white-space: nowrap
-
+no-wrap() {
+  text-overflow ellipsis
+  overflow hidden
+  white-space nowrap
+}
+wrap-n-text($n) {
+  display -webkit-box
+  -webkit-line-clamp $n
+  -webkit-box-orient vertical
+  text-overflow ellipsis
+  overflow hidden
+}
 // 扩展点击区域
-extend-click()
-  position: relative
-  &:before
-    content: ''
-    position: absolute
-    top: -10px
-    left: -10px
-    right: -10px
-    bottom: -10px
+extend-click() {
+  position relative
+  &:before {
+    content ''
+    position absolute
+    top -10px
+    left -10px
+    right -10px
+    bottom -10px
+  }
+}
+// 鼠标覆盖发光
+hover-light() {
+  cursor pointer
+  &:hover {
+    color #ffffff
+    animation neon2 1.5s ease-in-out infinite alternate
+    text-decoration:none; 
+    transition: all 0.5s;
+    // transition all 1s ease
+  }
+  @keyframes neon2 {
+    from {
+      text-shadow 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF
+    }
+    to {
+      text-shadow 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF
+    }
+  }
+}
+
+hover-move-right() {
+  cursor pointer
+  &:hover {
+    display inline-block
+    transform: translate(2px,0)
+    transition: transform 0.5s
+  }
+}
+
+hover-move-top() {
+  cursor pointer
+  &:hover {
+    display inline-block
+    transform: translate(0,-4px)
+    transition: transform 0.5s
+  }
+}
+
+hover-scale() {
+  transition transform 0.5s ease
+  &:hover {
+    cursor pointer
+    transform scale(1.05)
+    transition transform 0.5s ease
+  }
+}
+
+click-down() {
+  &:active {
+    transform translate(1px, 1px)
+  }
+}
+
+border-bottom-shadow() {
+  box-shadow 0 6px 6px #eeeeee
+}
