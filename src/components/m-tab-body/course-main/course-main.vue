@@ -60,6 +60,9 @@ export default {
         }
       ]
     }
+  },
+  props: {
+    // navPaths: Array
   }
 }
 </script>

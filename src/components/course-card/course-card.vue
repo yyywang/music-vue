@@ -25,6 +25,7 @@ export default {
 @import '~common/stylus/mixin.styl'
 
 .course-card {
+  hover-scale()
   .cover {
     height 170px
     background-color #000000

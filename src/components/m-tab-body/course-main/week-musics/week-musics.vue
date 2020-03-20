@@ -9,7 +9,9 @@
           <span
             v-if="item.duration"
             class="duration"
-          >{{ formatTwoNum(item.duration / 60) }}min{{ formatTwoNum(item.duration % 60) }}s</span>
+          >
+            {{ formatTwoNum(item.duration / 60) }}min{{ formatTwoNum(item.duration % 60) }}s
+          </span>
         </div>
         <div class="right">
           <i class="icon-play"></i>

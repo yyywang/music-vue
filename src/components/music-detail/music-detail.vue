@@ -7,7 +7,19 @@
           <div class="video-container">视频播放器</div>
           <div class="des">
             <div class="title">《G弦上的咏叹调》小提琴版 By 作曲：巴赫 演奏：莎拉张</div>
-            <div class="introduce">视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍。</div>
+            <div class="introduce">
+              <div :class="{ 'spread':isSpread, 'unspread': !isSpread, 'info':true }">
+                视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍。
+                视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍。
+              </div>
+              <div class="operator-spread text-right">
+                <i
+                  :class="{ 'spread':isSpread, 'unspread': !isSpread, 'icon-double_angle_right':true }"
+                  @click="spreadAbstractOrNot"
+                >
+                </i>
+              </div>
+            </div>
             <div class="stastics">
               <div class="view-num">
                 <i class="icon-eye_open"></i>
@@ -68,13 +80,19 @@
           </div> -->
         </div>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <div class="title">课程列表</div>
+        <div class="course-tab-container">
+          <week-tab></week-tab>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import NavPath from 'components/nav-path/nav-path'
+import WeekTab from 'components/week-tab/week-tab'
 
 export default {
   data() {
@@ -92,11 +110,19 @@ export default {
           name: '视频详情',
           path: { name: 'musicDetail', params: { weekNum: 1, musicId: 1 } }
         }
-      ]
+      ],
+      isSpread: false // 作品介绍是否展开
     }
   },
   components: {
-    NavPath
+    NavPath,
+    WeekTab
+  },
+  methods: {
+    // 展开/收起作品简介
+    spreadAbstractOrNot() {
+      this.isSpread = !this.isSpread
+    }
   }
 }
 </script>
@@ -124,9 +150,37 @@ export default {
           font-size 18px
         }
         .introduce {
+          position relative
           line-height 1.4em
           margin-top 20px
           color $color-text
+          .info {
+            line-height 1.4em
+            &.spread {
+              min-height 3em
+              height auto
+            }
+            &.unspread {
+              height 3em
+              overflow hidden
+              text-overflow ellipsis
+            }
+          }
+          .operator-spread {
+            .icon-double_angle_right {
+              hover-move-right()
+            }
+            .icon-double_angle_right:before {
+              display inline-block
+              color $color-sub-theme
+            }
+            .unspread:before {
+              transform rotate(90deg)
+            }
+            .spread:before {
+              transform rotate(-90deg)
+            }
+          }
         }
         .stastics {
           display flex
@@ -224,10 +278,19 @@ export default {
     }
   }
   .right {
-    height 300px
+    position relative
     width 380px
+    box-sizing border-box
     background-color #ffffff
     border-radius 8px
+    .title {
+      position absolute
+      top -30px
+      text-shadow-theme()
+    }
+    .course-tab-container {
+      padding 15px 15px
+    }
   }
 }
 </style>

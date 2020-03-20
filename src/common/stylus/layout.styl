@@ -16,6 +16,10 @@
   text-align center
 }
 
+.text-right {
+  text-align: right 
+}
+
 .fl {
   float left  
 }
@@ -42,6 +46,11 @@
 
 .margin-bottom-md {
   margin-bottom: 15px  
+}
+
+.margin-tb-md {
+  margin-top 15px
+  margin-bottom 15px
 }
 
 .padding-tb-md {
@@ -73,4 +82,53 @@
 
 .bold {
   font-weight: bold
+}
+
+.huaiyue {
+  display flex
+  justify-content space-between
+  .left {
+    width 800px
+    box-sizing border-box
+    border-radius 8px
+  }
+  .right {
+    position relative
+    width 380px
+    box-sizing border-box
+    border-radius 8px
+    .title {
+      position absolute
+      top -30px
+      left: 0
+      text-shadow-theme()
+    }
+  }
+
+}
+
+// tag
+
+[class^='tag-'] {
+  border-radius 4px
+  background-color #ffffff
+  border 1px solid $color-theme
+  padding 5px 10px
+  font-size 12px
+}
+
+.tag-default {
+  border 1px solid $color-theme
+}
+
+.tag-distract {
+  // border 1px solid 
+}
+
+.tag-style {
+  // border 1px solid 
+}
+
+.tag-motion {
+  // border 1px solid 
 }

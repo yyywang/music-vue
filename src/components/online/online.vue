@@ -15,14 +15,14 @@
     </div>
     <div class="latest-recommend">
       <div class="title">
-        <h1>最新推荐</h1>
+        <h1>ta 的热推</h1>
         <div class="icon-arrow">
           <i class="icon-double_angle_right"></i>
         </div>
       </div>
       <div class="content">
         <div class="recommend-card-container" v-for="(item, idx) in 3" :key="idx">
-          <recommend-card v-bind="hotRecommends"></recommend-card>
+          <recommend-card-online v-bind="hotRecommends"></recommend-card-online>
         </div>
       </div>
       <div class="footer">
@@ -34,7 +34,7 @@
 
 <script>
 import CourseCard from 'components/course-card/course-card'
-import RecommendCard from 'components/recommend-card/recommend-card'
+import RecommendCardOnline from 'components/recommend-card-online/recommend-card-online'
 import { getCourses } from 'api/online'
 import config from 'api/config'
 
@@ -49,7 +49,7 @@ export default {
   },
   components: {
     CourseCard,
-    RecommendCard
+    RecommendCardOnline
   },
   created() {
     this._getCoursesData()
@@ -68,13 +68,15 @@ export default {
 
 <style lang='stylus'>
 @import '~common/stylus/variable.styl'
+@import '~common/stylus/mixin'
 
 .online {
+  display flex
+  justify-content space-between
   width 1200px
   margin 0 auto
   margin-top 30px
   .courses {
-    float left
     width 75%
     box-sizing border-box
     padding 0 10px
@@ -92,6 +94,7 @@ export default {
         font-size 22px
         float right
         color $color-theme
+        hover-move-right()
       }
     }
     .content {
@@ -125,6 +128,7 @@ export default {
         font-size 22px
         float right
         color $color-theme
+        hover-move-right()
       }
     }
     .content {

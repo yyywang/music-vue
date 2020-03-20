@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Online from 'components/online/online'
 import Recommend from 'components/recommend/recommend'
+import RecommendDetail from 'components/recommend-detail/recommend-detail'
+import RecommendMy from 'components/recommend-my/recommend-my'
 import User from 'components/user/user'
 import MRegister from 'components/m-register/m-register'
 import Login from 'components/login/login'
@@ -88,16 +90,25 @@ export default new Router({
       name: 'homeworkDetail',
       component: HomeworkDetail
     },
-    // 视频详情页
-    {
+    { // 视频详情页
       path: '/online/:courseId/weeks/:weekNum/musics/:musicId',
       name: 'musicDetail',
       component: MusicDetail
     },
-    {
-      path: '/recommend',
+    { // 美音推荐首页
+      path: '/recommends',
       name: 'recommend',
       component: Recommend
+    },
+    {
+      path: '/recommends/my',
+      name: 'myRecommends',
+      component: RecommendMy
+    },
+    { // 美音推荐详情页
+      path: '/recommends/:recommendId',
+      name: 'recommendDetail',
+      component: RecommendDetail
     },
     {
       path: '/user',
