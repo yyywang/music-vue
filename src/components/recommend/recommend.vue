@@ -4,14 +4,16 @@
     <div class="header">
       <div class="left">
         <nav-path :navPaths="navPaths"></nav-path>
-        <select class="tag-picker" name id>
+        <select class="tag-picker" name>
           <option value>欧美</option>
           <option value>华语</option>
           <option value>布鲁斯</option>
         </select>
       </div>
       <div class="right">
-        <router-link tag="div" :to="{ name: 'myRecommends' }"><span class="my-recommend">我的推荐</span></router-link>
+        <router-link tag="div" :to="{ name: 'myRecommends' }">
+          <span class="my-recommend">我的推荐</span>
+        </router-link>
       </div>
     </div>
     <div class="card-list">
@@ -68,58 +70,60 @@ export default {
 @import '~common/stylus/variable'
 @import '~common/stylus/mixin'
 
-.header {
-  display flex
-  align-items center
-  justify-content space-between
-  .left {
+.recommend {
+  &>.header {
     display flex
     align-items center
-    .tag-picker {
-      width 120px
-      font-size 13px
-      border 1px solid #ffffff
-      padding 5px 10px
-      outline none
-      border-radius 4px
-      margin-left 20px
-      &:focus {
-        border 1px solid $color-theme-md
+    justify-content space-between
+    .left {
+      display flex
+      align-items center
+      .tag-picker {
+        width 120px
+        font-size 13px
+        border 1px solid #ffffff
+        padding 5px 10px
+        outline none
+        border-radius 4px
+        margin-left 20px
+        &:focus {
+          border 1px solid $color-theme-md
+        }
       }
     }
+    .right {
+      hover-move-right()
+      text-shadow-theme()
+    }
   }
-  .right {
-    hover-move-right()
-    text-shadow-theme()
-  }
-}
-.card-list {
-  display flex
-  justify-content space-between
-  flex-wrap wrap
-  width 100%
-  .create-recommend, .card-container {
-    width 32%
-    box-sizing border-box
-    margin-top 20px
-  }
-  .create-recommend {
+  .card-list {
     display flex
-    flex-direction column
-    justify-content center
-    align-items center
-    background-color #ffffff
-    border-radius 8px
-    .icon-plus {
-      font-size 100px
-      color $color-theme-lg
+    justify-content space-between
+    flex-wrap wrap
+    width 100%
+    .create-recommend, .card-container {
+      width 32%
+      box-sizing border-box
+      margin-top 20px
     }
-    .des {
-      margin-top 10px
-      font-size 22px
-      color $color-theme
+    .create-recommend {
+      display flex
+      flex-direction column
+      justify-content center
+      align-items center
+      background-color #ffffff
+      border-radius 8px
+      .icon-plus {
+        font-size 100px
+        color $color-theme-lg
+      }
+      .des {
+        margin-top 10px
+        font-size 22px
+        color $color-theme
+      }
+      hover-scale()
     }
-    hover-scale()
   }
 }
 </style>

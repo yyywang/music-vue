@@ -24,16 +24,17 @@ export default {}
 @import '~common/stylus/mixin'
 
 .homework-card {
-  min-width 386px
+  min-width 300px
   padding-top 10px
   padding-bottom 10px
+  hover-scale()
   .content {
     background-color $color-theme-md
     border-radius 8px
     padding-bottom 1px
     .score {
       float right
-      font-size 18px
+      font-size 16px
       height 36px
       line-height 36px
       padding-left 15px
@@ -53,7 +54,7 @@ export default {}
       margin 26px
       color #ffffff
       line-height 1.8em
-      font-size 18px
+      font-size 16px
       wrap-n-text(4)
     }
   }

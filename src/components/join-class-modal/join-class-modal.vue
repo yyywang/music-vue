@@ -7,47 +7,15 @@
             <div class="close"  @click="hideDetail">
               <i class="icon-remove"></i>
             </div>
-            <div class="title">推荐音乐</div>
+            <div class="title">加入班级</div>
             <div class="content">
               <div class="form-group">
-                <label for="title">标题</label>
-                <input type="text" name="title" id="title" />
+                <label for="classNum">班号</label>
+                <input type="text" name="t_class_num" id="classNum" placeholder="请输入班号">
               </div>
-              <div class="form-group">
-                <label for="content">内容</label>
-                <input type="text" name="content" id="content" />
-              </div>
-              <!-- S=标签 -->
-              <div class="form-group auto-height">
-                <div class="label">标签</div>
-                <div class="input-detail">
-                  <span class="tag-add"><i class="icon-plus"></i></span>
-                  <span class="tag-distract" v-for="(item, idx) in 19" :key="idx">憨憨</span>
-                  <span v-if="!isTagSpread" class="tag-spread" @click="tagSpread"><i class="icon-double_angle_down"></i></span>
-                  <span v-else class="tag-unspread" @click="tagUnspread"><i class="icon-double_angle_up"></i></span>
-                </div>
-              </div>
-              <!-- E=标签 -->
-              <!-- S=推荐链接 -->
-              <div class="form-group auto-height">
-                <label for class="long-label">音乐链接</label>
-                <div class="link-list">
-                  <div class="link-item" v-for="(item, idx) in linkItemArr" :key="linkItemArr[idx]">
-                    <input
-                      type="text"
-                      :name="idx"
-                      :id="idx"
-                      placeholder="音乐作品的链接，例：https://www.bilibili.com/video/av96561262"
-                    />
-                    <span v-if="idx !== 0" class="delete" @click="deleteLinkItem(idx)">删除</span>
-                    <span v-else class="create" @click="pushLinkItem">新增</span>
-                  </div>
-                </div>
-              </div>
-              <!-- E=推荐链接 -->
             </div>
             <div class="close-container clear text-center">
-              <button class="btn-info btn-lg" @click="hideDetail">发布</button>
+              <button class="btn-default">提交</button>
             </div>
           </div>
         </div>
@@ -58,41 +26,16 @@
 
 <script>
 export default {
-  data() {
-    return {
-      linkItemArr: [0],
-      isTagSpread: false
-    }
-  },
   methods: {
-    showDetail() {
-      this.detailShow = true
-    },
     hideDetail() {
-      this.hideCreateModal()
-    },
-    // 追加一条链接框
-    pushLinkItem() {
-      this.linkItemArr.push(this.linkItemArr.length)
-    },
-    // 删除索引为 idx 的链接框
-    deleteLinkItem(idx) {
-      this.linkItemArr.splice(idx, 1)
-    },
-    tagSpread() {
-      this.isTagSpread = true
-    },
-    tagUnspread() {
-      this.isTagSpread = false
+      this.hideJoinClassModal()
     }
   },
   props: {
-    detailShow: Boolean,
-    title: String,
-    content: String
+    detailShow: Boolean
   },
   // inject 属性接收祖先组件暴露的方法
-  inject: ['hideCreateModal']
+  inject: ['hideJoinClassModal']
 }
 </script>
 
@@ -140,7 +83,7 @@ export default {
         }
         .title {
           color #000000
-          text-align left
+          text-align center
           font-size 24px
           margin-bottom 25px
         }

@@ -1,7 +1,6 @@
 <template>
-  <div class="recommend-card">
+  <div class="question-card">
     <div class="content">
-      <div class="tag">R＆B，欧美，忧伤</div>
       <div class="title">G弦上的咏叹调</div>
       <div class="abstract">摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要要摘要摘要摘要摘要摘要摘要摘要要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要</div>
       <div class="info">
@@ -35,26 +34,17 @@ export default {
 @import '~common/stylus/variable'
 @import '~common/stylus/mixin'
 
-.recommend-card {
+.question-card {
   hover-scale()
   .content{
     background-color $color-theme-md
     border-radius 8px
     padding 0 20px 10px 20px
     color #ffffff
-    .tag {
-      float right
-      background-color $color-theme-lg
-      border-bottom-left-radius 8px
-      border-top-right-radius 8px
-      font-size 12px
-      padding 8px 20px
-      margin-right -20px
-    }
     .title {
       color $color-text
       font-size 18px
-      padding-top 40px
+      padding-top 30px
       margin-bottom 10px
     }
     .abstract {

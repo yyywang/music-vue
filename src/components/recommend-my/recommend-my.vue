@@ -48,40 +48,42 @@ export default {
 @import '~common/stylus/variable'
 @import '~common/stylus/mixin'
 
-.header {
-  display flex
-  align-items center
-  justify-content space-between
-  .left {
+.recommend-my {
+  &>.header {
     display flex
     align-items center
-    .tag-picker {
-      width 120px
-      font-size 13px
-      border 1px solid #ffffff
-      padding 5px 10px
-      outline none
-      border-radius 4px
-      margin-left 20px
-      &:focus {
-        border 1px solid $color-theme-md
+    justify-content space-between
+    .left {
+      display flex
+      align-items center
+      .tag-picker {
+        width 120px
+        font-size 13px
+        border 1px solid #ffffff
+        padding 5px 10px
+        outline none
+        border-radius 4px
+        margin-left 20px
+        &:focus {
+          border 1px solid $color-theme-md
+        }
       }
     }
+    .right {
+      hover-move-right()
+      text-shadow-theme()
+    }
   }
-  .right {
-    hover-move-right()
-    text-shadow-theme()
-  }
-}
-.card-list {
-  display flex
-  justify-content space-between
-  flex-wrap wrap
-  width 100%
-  .card-container {
-    width 32%
-    box-sizing border-box
-    margin-top 20px
+  .card-list {
+    display flex
+    justify-content space-between
+    flex-wrap wrap
+    width 100%
+    .card-container {
+      width 32%
+      box-sizing border-box
+      margin-top 20px
+    }
   }
 }
 </style>

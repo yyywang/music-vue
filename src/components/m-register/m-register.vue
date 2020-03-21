@@ -12,11 +12,11 @@
         <label for="realname">姓名</label>
         <input type="text" name="realname" id="realname" />
       </div>
-      <div class="form-group gender">
+      <div class="form-group gender flex-start">
         <label for>性别</label>
-        <input type="radio" name="gender" id="male" value="1" />
+        <input class="margin-right-sm" type="radio" name="gender" id="male" value="1" />
         <label for="male">男</label>
-        <input type="radio" name="gender" id="female" value="2" />
+        <input class="margin-right-sm" type="radio" name="gender" id="female" value="2" />
         <label for="female">女</label>
       </div>
       <div class="form-group">

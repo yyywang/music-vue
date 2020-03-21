@@ -3,7 +3,7 @@
     <router-link tag="div" class="tab-item" to="/online">
       <span class="tab-link">在线欣赏</span>
     </router-link>
-    <router-link tag="div" class="tab-item" to="/recommend">
+    <router-link tag="div" class="tab-item" to="/recommends">
       <span class="tab-link">美音推荐</span>
     </router-link>
     <router-link tag="div" class="tab-item" to="/user">

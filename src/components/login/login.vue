@@ -12,7 +12,7 @@
         <label for="secret">密码</label>
         <input type="password" name="secret" id="secret" />
       </div>
-      <div class="form-group">
+      <div class="form-group flex-end">
         <input class="remember-box" type="checkbox" name="remember" id="remember" />
         <span class="remember-text">30天内自动登录</span>
       </div>
@@ -43,7 +43,7 @@ export default {}
   .form-bg-panel {
     .form-group {
       .remember-box {
-        margin-left 60px
+        margin-right 10px
       }
       .remember-text {
         display inline-block
@@ -54,7 +54,7 @@ export default {}
     }
     .register-and-forget {
       float right
-      padding 30px 0
+      padding 20px 5px 30px 0
       color $color-sub-theme
       font-size 16px
       .register {

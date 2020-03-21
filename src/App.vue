@@ -2,7 +2,9 @@
   <div id="app">
     <m-header></m-header>
     <transition name>
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </transition>
     <div class="page-footer">
       <div class="icp">

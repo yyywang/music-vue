@@ -2,12 +2,10 @@
   height 1px
   background-color $color-theme
 }
-
 .divider-bold {
   height 2px
   background-color $color-theme
 }
-
 .item-ease {
   width 100%
   box-sizing border-box
@@ -22,4 +20,66 @@
     color white
     transition all 0.5s ease
   }
+}
+
+/* table */
+.tb-container {
+  color $color-theme
+  table {
+    width 100%
+    border-radius 8px
+    overflow hidden
+    thead {
+      background-color $color-theme-d
+      tr {
+        border-radius 8px
+        th {
+          padding-top 15px
+          padding-bottom: 15px
+        }
+      }
+    }
+    tbody {
+      margin-top 10px
+      background-color #ffffff
+      tr {
+        cursor pointer
+        // border-bottom 2px solid color-theme-rgba(0.3)
+        &:hover {
+          background-color color-theme-d-rgba(0.3)
+        }
+        td {
+          text-align center
+          padding-top 10px
+          padding-bottom: 10px
+        }
+      }
+    }
+  }
+}
+
+/* 标签相关 */
+
+[class^='tag-'] {
+  border-radius 4px
+  background-color #ffffff
+  border 1px solid $color-theme
+  padding 5px 10px
+  font-size 12px
+}
+
+.tag-default {
+  border 1px solid $color-theme
+}
+
+.tag-distract {
+  // border 1px solid 
+}
+
+.tag-style {
+  // border 1px solid 
+}
+
+.tag-motion {
+  // border 1px solid 
 }

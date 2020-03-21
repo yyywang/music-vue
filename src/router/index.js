@@ -4,7 +4,6 @@ import Online from 'components/online/online'
 import Recommend from 'components/recommend/recommend'
 import RecommendDetail from 'components/recommend-detail/recommend-detail'
 import RecommendMy from 'components/recommend-my/recommend-my'
-import User from 'components/user/user'
 import MRegister from 'components/m-register/m-register'
 import Login from 'components/login/login'
 import Forget from 'components/forget/forget'
@@ -21,8 +20,14 @@ import CourseIntroduce from 'components/m-tab-body/course-introduce/course-intro
 import CourseResource from 'components/m-tab-body/course-resource/course-resource'
 import CourseOutClass from 'components/course-out-class/course-out-class'
 import CourseQuestion from 'components/course-question/course-question'
+import CourseQuestionMy from 'components/course-question-my/course-question-my'
 import HomeworkDetail from 'components/homework-detail/homework-detail'
 import MusicDetail from 'components/music-detail/music-detail'
+import User from 'components/user/user'
+import UserProfile from 'components/user-profile/user-profile'
+import UserClass from 'components/user-class/user-class'
+import UserHomework from 'components/user-homework/user-homework'
+import UserNotification from 'components/user-notification/user-notification'
 
 Vue.use(Router)
 
@@ -75,10 +80,15 @@ export default new Router({
       name: 'courseOutClass',
       component: CourseOutClass
     },
-    {
-      path: '/online/:courseId/question',
+    { // 公开问答
+      path: '/online/:courseId/questions',
       name: 'courseQuestion',
       component: CourseQuestion
+    },
+    {
+      path: '/online/:courseId/questions/my',
+      name: 'courseQuestionMy',
+      component: CourseQuestionMy
     },
     {
       path: '/online/:courseId/homeworks',
@@ -100,7 +110,7 @@ export default new Router({
       name: 'recommend',
       component: Recommend
     },
-    {
+    {// 我的推荐
       path: '/recommends/my',
       name: 'myRecommends',
       component: RecommendMy
@@ -110,9 +120,32 @@ export default new Router({
       name: 'recommendDetail',
       component: RecommendDetail
     },
-    {
+    { // 个人中心相关
       path: '/user',
-      component: User
+      name: 'user',
+      component: User,
+      children: [
+        {
+          path: 'profile',
+          name: 'userProfile',
+          component: UserProfile
+        },
+        {
+          path: 'classes',
+          name: 'userClass',
+          component: UserClass
+        },
+        {
+          path: 'homeworks',
+          name: 'userHomework',
+          component: UserHomework
+        },
+        {
+          path: 'notifications',
+          name: 'userNotification',
+          component: UserNotification
+        }
+      ]
     },
     {
       path: '/register',
@@ -131,7 +164,7 @@ export default new Router({
       component: Notice
     },
     {
-      path: '/search-result',
+      path: '/search',
       component: SearchResult
     },
     {

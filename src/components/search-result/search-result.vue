@@ -59,6 +59,8 @@ export default {}
     color $color-theme
     table {
       width 100%
+      border-radius 8px
+      overflow hidden
       thead {
         background-color $color-theme-d
         tr {
@@ -73,7 +75,7 @@ export default {}
         background-color #ffffff
         tr {
           cursor pointer
-          border-bottom 2px solid color-theme-rgba(0.3)
+          // border-bottom 2px solid color-theme-rgba(0.3)
           &:hover {
             background-color color-theme-d-rgba(0.3)
           }

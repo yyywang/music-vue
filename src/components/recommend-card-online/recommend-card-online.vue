@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend-card">
+  <div class="recommend-card-online">
     <div class="title">无心快语</div>
     <div class="abstract">大理石开发老师的课大理石开发老师的课大理石开发老师的课大理石开发老师的课大理石开发老师的课大理石开发老师的课大理石开发老师的课大理石开发老师的课</div>
     <div class="footer">
@@ -21,31 +21,31 @@ export default {}
 @import '~common/stylus/variable.styl'
 @import '~common/stylus/mixin.styl'
 
-.recommend-card {
+.recommend-card-online {
   hover-scale()
   background-color $color-bg-recommend-card
   border-radius 8px
   padding 15px 20px 10px 20px
   box-shadow 0 6px 6px #ccc
-  .title {
+  &>.title {
     color #1E1C1D
     font-size 16px
   }
-  .abstract {
+  &>.abstract {
     wrap-n-text(3)
     font-size 12px
     line-height 1.5em
   }
-  .footer {
+  &>.footer {
     display flex
     justify-content space-between
     align-items baseline
     font-size 12px
     height 2em
-    .author {
+    &>.author {
       line-height 2em
     }
-    .operator {
+    &>.operator {
       font-weight bolder
       font-size 14px
       vertical-align baseline
