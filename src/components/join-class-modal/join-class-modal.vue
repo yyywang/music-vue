@@ -11,11 +11,11 @@
             <div class="content">
               <div class="form-group">
                 <label for="classNum">班号</label>
-                <input type="text" name="t_class_num" id="classNum" placeholder="请输入班号">
+                <input :model="class_num" type="text" name="t_class_num" id="classNum" placeholder="请输入班号">
               </div>
             </div>
             <div class="close-container clear text-center">
-              <button class="btn-default">提交</button>
+              <button class="btn-default" @click="joinClass">提交</button>
             </div>
           </div>
         </div>
@@ -25,10 +25,24 @@
 </template>
 
 <script>
+import TClass from '@/models/t_class'
+
 export default {
+  data() {
+    return {
+      class_num: ''
+    }
+  },
   methods: {
     hideDetail() {
       this.hideJoinClassModal()
+    },
+    async joinClass() {
+      try {
+        await TClass.joinClass(this.class_num)
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   props: {

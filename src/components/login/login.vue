@@ -1,38 +1,62 @@
 <template>
   <div class="login">
-    <div class="form-bg-panel">
+    <el-form
+      :model="loginForm"
+      ref="registerForm"
+      label-width="70px"
+      class="form-bg-panel"
+    >
       <div class="form-title">
-        <h2>登录</h2>
+        <h2>登 录</h2>
       </div>
-      <div class="form-group">
-        <label for="account">学号</label>
-        <input type="text" name="account" id="account" />
+      <el-form-item label="学号" prop="account" size="large">
+        <el-input v-model="loginForm.account" placeholder="请输入学号" size="medium"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="secret" size="large">
+        <el-input v-model="loginForm.secret" placeholder="请输入密码" size="medium" show-password></el-input>
+      </el-form-item>
+      <el-form-item class="content-right">
+        <el-link class="register-link">
+          <router-link to="/register">注册</router-link>
+        </el-link>
+        <span>/</span>
+        <el-link class="forget-link">
+          <router-link to="/forget">忘记密码?</router-link>
+        </el-link>
+      </el-form-item>
+      <div class="text-center">
+        <button class="btn-info btn-lg" @click="login">登录</button>
       </div>
-      <div class="form-group">
-        <label for="secret">密码</label>
-        <input type="password" name="secret" id="secret" />
-      </div>
-      <div class="form-group flex-end">
-        <input class="remember-box" type="checkbox" name="remember" id="remember" />
-        <span class="remember-text">30天内自动登录</span>
-      </div>
-      <div class="register-and-forget">
-        <span class="register">
-          <router-link to="/register" tag="div">注册</router-link>
-        </span>
-        <span class="forget">
-          <router-link to="/forget" tag="div">忘记密码</router-link>
-        </span>
-      </div>
-      <div class="form-group text-center submit-container">
-        <button class="btn-default">提交</button>
-      </div>
-    </div>
+    </el-form>
   </div>
 </template>
 
 <script>
-export default {}
+import User from '@/lin/models/user'
+
+export default {
+  data() {
+    return {
+      loginForm: {
+        account: '2016329621073',
+        secret: '121212',
+        type: 300 // type == 300 代表通过学号登录
+      }
+    }
+  },
+  methods: {
+    async login() {
+      try {
+        await User.getToken(this.loginForm)
+        this.$router.push({path: '/'})
+      } catch (e) {
+        if (e.data.error_code === 10030) {
+          this.$message.error(e.data.msg)
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style lang='stylus'>
@@ -40,36 +64,50 @@ export default {}
 @import '~common/stylus/variable.styl'
 
 .login {
-  .form-bg-panel {
-    .form-group {
-      .remember-box {
-        margin-right 10px
-      }
-      .remember-text {
-        display inline-block
-        vertical-align middle
-        line-height 40px
-        font-size 16px
-      }
-    }
-    .register-and-forget {
-      float right
-      padding 20px 5px 30px 0
-      color $color-sub-theme
-      font-size 16px
-      .register {
-        display inline-block
-        hover-move-right()
-      }
-      .forget {
-        display inline-block
-        margin-left 30px
-        hover-move-right()
-      }
-    }
-    .submit-container {
-      clear both
+  .el-form-item__label {
+    font-size 18px
+    color #829E9A
+  }
+  .register-link:hover,
+  .forget-link:hover {
+    color $color-sub-theme
+    &:after {
+      border-color $color-sub-theme
     }
   }
+  .content-right {
+    text-align right
+  }
+  // .form-bg-panel {
+  //   .form-group {
+  //     .remember-box {
+  //       margin-right 10px
+  //     }
+  //     .remember-text {
+  //       display inline-block
+  //       vertical-align middle
+  //       line-height 40px
+  //       font-size 16px
+  //     }
+  //   }
+  //   .register-and-forget {
+  //     float right
+  //     padding 20px 5px 30px 0
+  //     color $color-sub-theme
+  //     font-size 16px
+  //     .register {
+  //       display inline-block
+  //       hover-move-right()
+  //     }
+  //     .forget {
+  //       display inline-block
+  //       margin-left 30px
+  //       hover-move-right()
+  //     }
+  //   }
+  //   .submit-container {
+  //     clear both
+  //   }
+  // }
 }
 </style>
