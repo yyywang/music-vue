@@ -1,7 +1,7 @@
 // ajax 封装插件, 使用 axios
 import Vue from 'vue'
 import axios from 'axios'
-// import Config from '@/config'
+import Config from '@/config'
 import ErrorCode from '@/config/error-code'
 import store from '@/store'
 import { getToken, saveAccessToken } from '@/lin/utils/token'
@@ -9,7 +9,7 @@ import { getToken, saveAccessToken } from '@/lin/utils/token'
 const config = {
   // baseURL: Config.baseURL || process.env.apiUrl || '',
   baseURL: 'http://localhost:5009/',
-  timeout: 10 * 1000, // 请求超时时间设置
+  timeout: 5 * 1000, // 请求超时时间设置
   crossDomain: true,
   // withCredentials: true, // Check cross-site Access-Control
   // 定义可获得的http响应状态码
@@ -17,6 +17,19 @@ const config = {
   validateStatus(status) {
     return status >= 200 && status < 510
   },
+}
+
+/**
+ * 错误码是否是refresh相关
+ * @param {number} code 错误码
+ */
+function refreshTokenException(code) {
+  let flag = false
+  const codes = [10000, 10042, 10050, 10052]
+  if (codes.includes(code)) {
+    flag = true
+  }
+  return flag
 }
 
 // const retryTime = 2 // 请求失败重试次数
@@ -85,7 +98,7 @@ _axios.interceptors.request.use(
       /* eslint-disable-next-line */
       console.warn(`其他请求类型: ${reqConfig.method}, 暂无自动处理`)
     }
-    // step2: auth 处理
+    // step2: permission 处理
     if (reqConfig.url === 'cms/user/refresh') {
       const refreshToken = getToken('refresh_token')
       if (refreshToken) {
@@ -110,26 +123,24 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
   async res => {
-    let { error_code, msg } = res.data // eslint-disable-line
-    let message = '' // 错误提示
+    let { code, message } = res.data // eslint-disable-line
     if (res.status.toString().charAt(0) === '2') {
       return res.data
     }
     return new Promise(async (resolve, reject) => {
-      const { params, url } = res.config
+      const { url } = res.config
 
-      // refresh_token 异常，直接登出
-      if (error_code === 10000 || error_code === 10100) {
+      // refreshToken相关，直接登出
+      if (refreshTokenException(code)) {
         setTimeout(() => {
           store.dispatch('loginOut')
           const { origin } = window.location
           window.location.href = origin
         }, 1500)
-        resolve(null)
-        return
+        return resolve(null)
       }
-      // 令牌相关，刷新令牌
-      if (error_code === 10040 || error_code === 10050) {
+      // assessToken相关，刷新令牌
+      if (code === 10041 || code === 10051) {
         const cache = {}
         if (cache.url !== url) {
           cache.url = url
@@ -137,36 +148,30 @@ _axios.interceptors.response.use(
           saveAccessToken(refreshResult.access_token)
           // 将上次失败请求重发
           const result = await _axios(res.config)
-          resolve(result)
-          return
+          return resolve(result)
         }
       }
-      // 本次请求添加 params 参数：handleError 为 true，用户自己try catch，框架不做处理
-      if (params && params.handleError) {
-        reject(res)
-        return
+      // 第一种情况：默认直接提示后端返回的异常信息；特殊情况：如果本次请求添加了 handleError: true，用户自己try catch，框架不做处理
+      if (res.config.handleError) {
+        return reject(res)
       }
-      console.log('msg', msg)
-      // 本次请求添加 params 参数：showBackend 为 true, 弹出后端返回错误信息
-      if (params && params.showBackend) {
-        message = msg
-      } else {
+      // 第二种情况：采用前端自己的一套异常提示信息；特殊情况：如果本次请求添加了 showBackend: true, 弹出后端返回错误信息。
+      if (Config.useFrontEndErrorMsg && !res.config.showBackend) {
         // 弹出前端自定义错误信息
-        const errorArr = Object.entries(ErrorCode).filter(v => v[0] === error_code.toString())
+        const errorArr = Object.entries(ErrorCode).filter(v => v[0] === code.toString())
         // 匹配到前端自定义的错误码
-        if (errorArr.length > 0) {
-          if (errorArr[0][1] !== '') {
-            message = errorArr[0][1] // eslint-disable-line
-          } else {
-            message = ErrorCode['777']
-          }
+        if (errorArr.length > 0 && errorArr[0][1] !== '') {
+          message = errorArr[0][1] // eslint-disable-line
+        } else {
+          message = ErrorCode['777']
         }
       }
+
       Vue.prototype.$message({
         message,
         type: 'error',
       })
-      reject(new Error())
+      reject()
     })
   },
   error => {

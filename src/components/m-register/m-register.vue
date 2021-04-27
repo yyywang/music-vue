@@ -47,7 +47,9 @@
 </template>
 
 <script>
-import User from '@/lin/models/user'
+import client from '@/models/client'
+// import { getCourses } from '@/api/online'
+
 export default {
   data() {
     // 校验学号
@@ -93,13 +95,13 @@ export default {
     }
     return {
       registerForm: {
-        nickname: '',
-        realname: '',
-        gender: '',
-        stu_id: '',
-        account: '', // account === email
-        secret: '',
-        re_secret: '',
+        nickname: '怀月',
+        realname: '11',
+        gender: '1',
+        stu_id: '2016329621072',
+        account: 'ywang_perfect@163.com', // account === email
+        secret: '123456',
+        re_secret: '123456',
         type: 100
       },
       registerRules: {
@@ -141,13 +143,23 @@ export default {
     async register() {
       if (this.validateRegisterForm()) {
         try {
-          await User.register(this.registerForm)
-          this.$message.success('注册成功！')
-          this.$router.push({path: '/'})
-        } catch (e) {
-          if (e.data.error_code === 10030) {
-            this.$message.error(e.data.msg)
+          this.loading = true
+          const res = await client.register(this.registerForm)
+          console.log(res)
+          if (res.code === 20000) {
+            this.$message.error(res.message)
+          } else if (res.code === 0) {
+            this.$message.success(res.message)
+          // this.$router.push({path: '/'})
           }
+          
+        } catch (e) {
+          // if (e.data.error_code === 10030) {
+          //   this.$message.error(e.data.msg)
+          // }
+          console.log(e)
+        } finally {
+          this.loading = false
         }
       }
     },

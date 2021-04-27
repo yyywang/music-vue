@@ -8,8 +8,8 @@
         </div>
       </div>
       <div class="content">
-        <div class="course-card-container" v-for="(item,idx) in 6" :key="idx" >
-          <course-card v-bind="courses"></course-card>
+        <div class="course-card-container" v-for="(item,idx) in courses" :key="idx" >
+          <course-card v-bind="item"></course-card>
         </div>
       </div>
     </div>
@@ -35,10 +35,7 @@
 <script>
 import CourseCard from 'components/course-card/course-card'
 import RecommendCardOnline from 'components/recommend-card-online/recommend-card-online'
-import { getCourses } from 'api/online'
-import config from 'api/config'
-
-const ERR_OK = config.ERR_OK
+import course from '@/models/course'
 
 export default {
   data() {
@@ -52,15 +49,11 @@ export default {
     RecommendCardOnline
   },
   created() {
-    this._getCoursesData()
+    this.setCoursesData()
   },
   methods: {
-    _getCoursesData() {
-      getCourses().then(res => {
-        if (res.data.error_code === ERR_OK) {
-          this.courses = res.data.data.items
-        }
-      })
+    async setCoursesData() {
+      this.courses = await course.getCourses()
     }
   }
 }

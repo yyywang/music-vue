@@ -5,7 +5,7 @@
     </div>
     <div class="introduce">
       <div class="title">{{title}}</div>
-      <div class="abstract">{{abstract}}爱丽丝打开放爱丽丝打开放爱丽丝打开放爱丽丝打开放爱丽丝打开放爱丽丝打开放假啊拉萨的咖啡机爱丽丝</div>
+      <div class="abstract">{{introduce}}</div>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   props: {
     cover_url: String,
     title: String,
-    abstract: String
+    introduce: String
   }
 }
 </script>
@@ -30,6 +30,11 @@ export default {
     height 170px
     background-color #000000
     border-radius 8px
+    img {
+      max-width 100%
+      height 100%
+      border-radius 8px
+    }
   }
   .introduce {
     background-color #ffffff
@@ -41,12 +46,13 @@ export default {
       font-size $font-size-medium
       height 2em
       line-height 2em
-      text-shadow 0 5px 10px rgba(0,0,0,0.2)
+      text-shadow 0 3px 3px rgba(0,0,0,0.2)
     }
     .abstract {
       font-size $font-size-small
       line-height 1.3em
       color #666666
+      min-height 30px
       wrap-n-text(2)
     }
   }

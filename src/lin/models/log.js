@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { get } from '@/lin/plugins/axios'
+import _axios, { get } from '@/lin/plugin/axios'
 
 class Log {
   name = null
@@ -41,15 +41,15 @@ class Log {
     // lCount && this.lCount = lCount
   }
 
-  async increseUpage() {
+  async increaseUpage() {
     this.uPage += 1
   }
 
-  async increseLpage() {
+  async increaseLpage() {
     this.lPage += 1
   }
 
-  increseSpage() {
+  increaseSpage() {
     this.sPage += 1
   }
 
@@ -96,24 +96,24 @@ class Log {
    * @param {number} end 结束时间
    */
   async getLogs({ count, page, name, start, end, next = false }) {
-    try {
-      if (!next) {
-        this.setBaseInfo(name, start, end)
-      }
-      if (page === 0) {
-        this.lPage = 0
-      }
-      const res = await get('cms/log', {
+    if (!next) {
+      this.setBaseInfo(name, start, end)
+    }
+    if (page === 0) {
+      this.lPage = 0
+    }
+    const res = await _axios({
+      url: 'cms/log',
+      params: {
         count: count || this.lCount,
         page: page || this.lPage,
         name: name || this.name,
         start: start || this.start,
         end: end || this.end,
-      })
-      return res
-    } catch (error) {
-      console.log('error', error)
-    }
+      },
+      handleError: true,
+    })
+    return res
   }
 
   /**
@@ -149,17 +149,17 @@ class Log {
   }
 
   async moreUserPage() {
-    await this.increseUpage()
+    await this.increaseUpage()
     return this.getLoggedUsers({})
   }
 
   async moreLogPage() {
-    await this.increseLpage()
+    await this.increaseLpage()
     return this.getLogs({ next: true })
   }
 
   async moreSearchPage() {
-    this.increseSpage()
+    this.increaseSpage()
     return this.searchLogs({ next: true })
   }
 }

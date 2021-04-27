@@ -33,13 +33,14 @@
 
 <script>
 import User from '@/lin/models/user'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   data() {
     return {
       loginForm: {
-        account: '2016329621073',
-        secret: '121212',
+        account: '2016329621072',
+        secret: '123456',
         type: 300 // type == 300 代表通过学号登录
       }
     }
@@ -47,14 +48,30 @@ export default {
   methods: {
     async login() {
       try {
-        await User.getToken(this.loginForm)
+        await User.getToken(this.loginForm.account, this.loginForm.secret, this.loginForm.type)
+        await this.getInformation()
         this.$router.push({path: '/'})
+        window.location.reload(true)
       } catch (e) {
         if (e.data.error_code === 10030) {
           this.$message.error(e.data.msg)
         }
       }
-    }
+    },
+    async getInformation() {
+      try {
+        // 尝试获取当前用户信息
+        const user = await User.getPermissions()
+        this.setUserAndState(user)
+        this.setUserPermissions(user.permissions)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    ...mapActions(['setUserAndState']),
+    ...mapMutations({
+      setUserPermissions: 'SET_USER_PERMISSIONS',
+    }),
   }
 }
 </script>

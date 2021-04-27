@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Preview from '@/components/base/preview/preview'
+import Preview from '@/component/base/preview/preview'
 
 const previewImage = {}
 previewImage.install = vue => {

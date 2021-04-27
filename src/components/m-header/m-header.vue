@@ -11,11 +11,17 @@
         <div class="img-add"></div>
         <div class="img-notice"></div>
         <div class="img-back"></div>
-        <div class="login">
-          <router-link to="/login" tag="div">登录</router-link>
+        <div v-if="!logined" class="disboard">
+          <div class="login">
+            <router-link to="/login" tag="div">登录</router-link>
+          </div>
+          <div class="register">
+            <router-link to="/register" tag="div">注册</router-link>
+          </div>
         </div>
-        <div class="register">
-          <router-link to="/register" tag="div">注册</router-link>
+        <div v-else class="disboard">
+          <div class="nickname">{{nickname}}</div>
+          <div class="login-out" @click="outLogin">退出</div>
         </div>
       </div>
     </div>
@@ -25,11 +31,39 @@
 <script>
 import Logo from 'components/logo/logo'
 import HeaderTab from 'components/header-tab/header-tab'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
     Logo,
     HeaderTab
+  },
+  data() {
+    return {
+      logined: false,
+      nickname: null
+    }
+  },
+  computed: {
+    ...mapGetters(['user']),
+  },
+  methods: {
+    ...mapActions(['loginOut', 'setUserAndState']),
+    init() {
+      if (this.$store.getters.logined) {
+        this.logined = true
+        const { user } = this.$store.state
+        this.nickname = user.nickname
+      }
+    },
+    outLogin() {
+      window.location.reload(true)
+      this.loginOut()
+      this.$router.push({path: '/'})
+    },
+  },
+  created() {
+    this.init()
   }
 }
 </script>
@@ -106,6 +140,20 @@ export default {
         opacity 0.9
         color #ffffff
         hover-move-right()
+      }
+      .nickname {
+        opacity 0.9
+        color #ffffff
+      }
+      .login-out {
+        opacity 0.9
+        color #FF0033
+        hover-move-right()
+      }
+      .disboard {
+        display flex
+        justify-content space-between
+        min-width 80px
       }
     }
   }
