@@ -171,7 +171,7 @@ _axios.interceptors.response.use(
         message,
         type: 'error',
       })
-      reject()
+      // reject()
     })
   },
   error => {

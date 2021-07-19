@@ -152,7 +152,6 @@ export default {
             this.$message.success(res.message)
           // this.$router.push({path: '/'})
           }
-          
         } catch (e) {
           // if (e.data.error_code === 10030) {
           //   this.$message.error(e.data.msg)
